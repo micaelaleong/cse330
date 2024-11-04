@@ -52,7 +52,7 @@ static int producer_thread(void *data)
 			{
 				if (down_interruptible(&empty))
 				{
-					return;
+					continue;
 				}
 
 				mutex_lock(&mutex);
@@ -100,11 +100,6 @@ static int consumer_thread(void *data)
 		printk("Consumer-%d has consumed a zombie process with pid %d and parent pid %d\n", num, zombie->pid, zombie->parent->pid);
 
 		kill_pid(zombie->parent->thread_pid, SIGKILL, 0);
-
-		if (p && p->parent)
-		{
-			int
-		}
 	}
 
 	return 0;
